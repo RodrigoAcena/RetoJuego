@@ -62,4 +62,9 @@ public abstract class Personaje {
 	public String toString() {
 		return nombre + "=> Vida: " + vida+ "/" + vidaInicial;
 	}
+	
+	public void curar() {
+		// TODO Auto-generated method stub
+		
+	}
 }
