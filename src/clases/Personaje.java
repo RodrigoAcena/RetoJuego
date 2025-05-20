@@ -1,6 +1,6 @@
 package clases;
 
-public class Personaje {
+public abstract class Personaje {
 
 	protected int vida;
 	protected int vidaInicial;
@@ -48,9 +48,6 @@ public class Personaje {
 	}
 	public int atacar(Personaje otro) {
 		return otro.vida -= (this.ataque - otro.defensa) < 0 ? 0 : (this.ataque - otro.defensa);
-	}
-	public void curar() {
-		
 	}
 	public void resetear() {
 		setVida(vidaInicial);
