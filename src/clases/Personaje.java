@@ -1,6 +1,6 @@
 package clases;
 
-public abstract class Personaje {
+public abstract class Personaje implements Jugable{
 
 	protected int vida;
 	protected int vidaInicial;
@@ -61,10 +61,5 @@ public abstract class Personaje {
 	@Override
 	public String toString() {
 		return nombre + "=> Vida: " + vida+ "/" + vidaInicial;
-	}
-	
-	public void curar() {
-		// TODO Auto-generated method stub
-		
 	}
 }
