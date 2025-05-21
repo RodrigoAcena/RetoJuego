@@ -21,7 +21,7 @@ public class Puntuacion implements Serializable {
 		try {
 			FileWriter fw = new FileWriter(archivo);
 			escritor = new PrintWriter(fw);
-			if (recordSuperado(nombre, rondas) == true) {
+			if (!recordSuperado(nombre, rondas)) {
 				escritor.println("Nombre del jugador: " + nombre);
 				escritor.println("Rondas jugadas: " + rondas);
 			}
