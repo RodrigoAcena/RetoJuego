@@ -11,23 +11,28 @@ import java.util.Scanner;
 public class Puntuacion implements Serializable {
 	private static final long serialVersionUID = 707446558496930666L;
 	private File archivo;
-	private FileWriter fw;
-	private PrintWriter escritor;
 
-	public Puntuacion(String ruta) throws IOException {
+	public Puntuacion(String ruta){
 		archivo = new File(ruta);
-		fw = new FileWriter(archivo);
-		escritor = new PrintWriter(fw);
 	}
 
 	public void insertarRecord(String nombre, int rondas) {
-		if (recordSuperado(nombre, rondas) == true) {
-			escritor.println("Nombre del jugador: " + nombre);
-			escritor.println("Rondas jugadas: " + rondas);
+		PrintWriter escritor = null;
+		try {
+			FileWriter fw = new FileWriter(archivo);
+			escritor = new PrintWriter(fw);
+			if (recordSuperado(nombre, rondas) == true) {
+				escritor.println("Nombre del jugador: " + nombre);
+				escritor.println("Rondas jugadas: " + rondas);
+			}
+		} catch (IOException e) {
+			// TODO: handle exception
+		} finally {
+			escritor.close();
 		}
 	}
 
-	public void leerRecord() throws IOException {
+	public void leerRecord() {
 		Scanner entrada = null;
 		try {
 			entrada = new Scanner(archivo);
@@ -36,7 +41,11 @@ public class Puntuacion implements Serializable {
 				System.out.println(linea);
 			}
 		} catch (FileNotFoundException e) {
-			archivo.createNewFile();
+			try {
+				archivo.createNewFile();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		} finally {
 			if (entrada != null) {
 				entrada.close();
