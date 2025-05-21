@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.Serializable;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Puntuacion implements Serializable {
@@ -21,9 +22,8 @@ public class Puntuacion implements Serializable {
 		try {
 			FileWriter fw = new FileWriter(archivo);
 			escritor = new PrintWriter(fw);
-			if (!recordSuperado(nombre, rondas)) {
-				escritor.println("Nombre del jugador: " + nombre);
-				escritor.println("Rondas jugadas: " + rondas);
+			if (!recordSuperado(rondas)) {
+				escritor.println(nombre +" "+ rondas);
 			}
 		} catch (IOException e) {
 			// TODO: handle exception
@@ -53,15 +53,21 @@ public class Puntuacion implements Serializable {
 		}
 	}
 
-	public boolean recordSuperado(String nombre, int rondas) {
+	public boolean recordSuperado(int rondas) {
 		Scanner entrada = null;
 		try {
 			entrada = new Scanner(archivo);
 			while (entrada.hasNextLine()) {
-				if (rondas > entrada.nextInt()) {
-					return true;
-				} else {
-					return false;
+				try {
+					if (rondas > entrada.nextInt()) {
+						return true;
+					} else {
+						return false;
+					}
+				} catch (InputMismatchException e) {
+					continue;
+				} finally {
+					entrada.nextLine();
 				}
 			}
 		} catch (FileNotFoundException e) {

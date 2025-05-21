@@ -67,7 +67,7 @@ public class Programa {
 					System.out.println(juego.getSiguiente().getNombre() + " ataca a " + nombre);
 					juego.getSiguiente().atacar(juego.getJugador());
 				} while(juego.terminarRonda() != true);
-				if(!puntos.recordSuperado(nombre, rondas)) {
+				if(!puntos.recordSuperado(rondas)) {
 					System.out.println("¡Nuevo Record!");
 					puntos.insertarRecord(nombre, rondas);
 				}
@@ -106,7 +106,7 @@ public class Programa {
 					System.out.println(juego.getSiguiente().getNombre() + " ataca a " + nombre);
 					juego.getSiguiente().atacar(juego.getJugador());
 				} while(juego.terminarRonda() != true);
-				if(!puntos.recordSuperado(nombre, rondas)) {
+				if(!puntos.recordSuperado(rondas)) {
 					System.out.println("¡Nuevo Record!");
 					puntos.insertarRecord(nombre, rondas);
 				}
