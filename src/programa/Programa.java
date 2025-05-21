@@ -1,19 +1,22 @@
 package programa;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import clases.*;
 
 public class Programa {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		Scanner entrada = new Scanner(System.in);
 		Juego juego = new Juego();
+		Puntuacion puntos = new Puntuacion("ficheros/mejorPuntuacion.txt");
 		String nombre;
 		int clase;
 		int rondas;
 		int elegir;
 		
+		puntos.leerRecord();
 		System.out.print("¡Bienvenido al juego!\n"
 				+ "Introduce el nombre del personaje: ");
 		nombre = entrada.nextLine();
@@ -100,6 +103,10 @@ public class Programa {
 					System.out.println(juego.getSiguiente().getNombre() + " ataca a " + nombre);
 					juego.getSiguiente().atacar(juego.getJugador());
 				} while(juego.terminarRonda() != true);
+				if(puntos.recordSuperado(nombre, rondas) == true) {
+					System.out.println("¡Nuevo Record!");
+					puntos.insertarRecord(nombre, rondas);
+				}
 			} while(juego.finalizarJuego() != true);
 			break;
 		}
