@@ -90,7 +90,7 @@ public class Juego {
 		} else if(ronda >= nRondas) {
 			System.out.println("HAS GANADO");
 			return true;
-		} else if(jugador.getVida() <= 0) {
+		} else if(!jugador.muerto(jugador)) {
 			System.out.println(jugador.getNombre() + " ha muerto...");
 			return true;
 		}
